@@ -4,6 +4,12 @@ A Python-based tool for profiling bilingual Italian–English text datasets usin
 
 ---
 
+## App Preview
+
+Interactive Streamlit interface for real-time text analysis:
+
+![App Screenshot](screenshot.png)
+
 ## Overview
 
 This project analyzes text data and extracts key linguistic features such as:
