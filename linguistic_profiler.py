@@ -29,32 +29,51 @@ def tokenize(text):
     return cleaned.split()
 
 
-ddef detect_language(text):
-    text_lower = text.lower()
+def detect_language(text):
+    tokens = tokenize(text)
+    token_set = set(tokens)
 
-    italian_markers = ["è", "questa", "questo", "dati", "linguistici", "intelligenza"]
-    english_markers = ["this", "language", "data", "artificial", "intelligence", "project"]
+    italian_markers = {
+        "ciao", "hai", "visto", "nuova", "dobbiamo", "fare", "per",
+        "progetto", "entro", "venerdì", "ieri", "ho", "fatto", "una",
+        "con", "il", "di", "londra", "mi", "hanno", "detto", "che",
+        "è", "stato", "anticipato", "situazione", "lo", "so", "ma",
+        "chiudere", "tutto", "tempo", "mandami", "pure", "tuo", "sulla",
+        "salvato", "cerchiamo", "non", "informazioni", "sensibili"
+    }
 
-    italian_score = sum(1 for marker in italian_markers if marker in text_lower)
-    english_score = sum(1 for marker in english_markers if marker in text_lower)
+    english_markers = {
+        "email", "brainstorming", "customer", "experience", "call",
+        "team", "deadline", "awkward", "hustle", "feedback", "draft",
+        "cloud", "overshare", "let's", "make", "it", "happen"
+    }
+
+    italian_score = len(token_set.intersection(italian_markers))
+    english_score = len(token_set.intersection(english_markers))
 
     total = italian_score + english_score
 
     if total == 0:
         return "Unknown"
 
-    ratio = italian_score / total
+    english_ratio = english_score / total
 
-    if 0.4 <= ratio <= 0.6:
-        return "Mixed (balanced)"
-    elif ratio > 0.6:
-        if english_score > 0:
+    if italian_score > 0 and english_score > 0:
+        if 0.30 <= english_ratio <= 0.70:
+            return "Mixed (balanced)"
+        elif english_ratio < 0.30:
             return "Italian (dominant)"
-        return "Italian"
-    else:
-        if italian_score > 0:
+        else:
             return "English (dominant)"
+
+    if italian_score > 0:
+        return "Italian"
+
+    if english_score > 0:
         return "English"
+
+    return "Unknown"
+
 
 def lexical_diversity(tokens):
     if not tokens:
