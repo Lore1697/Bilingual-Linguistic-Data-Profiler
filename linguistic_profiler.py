@@ -29,7 +29,7 @@ def tokenize(text):
     return cleaned.split()
 
 
-def detect_language(text):
+ddef detect_language(text):
     text_lower = text.lower()
 
     italian_markers = ["è", "questa", "questo", "dati", "linguistici", "intelligenza"]
@@ -38,13 +38,23 @@ def detect_language(text):
     italian_score = sum(1 for marker in italian_markers if marker in text_lower)
     english_score = sum(1 for marker in english_markers if marker in text_lower)
 
-    if italian_score > english_score:
-        return "Italian"
-    elif english_score > italian_score:
-        return "English"
-    else:
+    total = italian_score + english_score
+
+    if total == 0:
         return "Unknown"
 
+    ratio = italian_score / total
+
+    if 0.4 <= ratio <= 0.6:
+        return "Mixed (balanced)"
+    elif ratio > 0.6:
+        if english_score > 0:
+            return "Italian (dominant)"
+        return "Italian"
+    else:
+        if italian_score > 0:
+            return "English (dominant)"
+        return "English"
 
 def lexical_diversity(tokens):
     if not tokens:
@@ -53,10 +63,16 @@ def lexical_diversity(tokens):
 
 
 def remove_stopwords(tokens, language):
-    if language == "Italian":
+    if language.startswith("Italian"):
         return [t for t in tokens if t not in ITALIAN_STOPWORDS]
-    if language == "English":
+
+    if language.startswith("English"):
         return [t for t in tokens if t not in ENGLISH_STOPWORDS]
+
+    if language.startswith("Mixed"):
+        combined_stopwords = ITALIAN_STOPWORDS.union(ENGLISH_STOPWORDS)
+        return [t for t in tokens if t not in combined_stopwords]
+
     return tokens
 
 
@@ -156,6 +172,6 @@ def main():
            writer.writeheader()
            writer.writerows(report_rows)
        print(f"\nReport exported to {OUTPUT_FILE}")
-       
+
 if __name__ == "__main__":
     main()

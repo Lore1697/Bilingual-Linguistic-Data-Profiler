@@ -4,12 +4,6 @@ A Python-based tool for profiling bilingual Italian–English text datasets usin
 
 ---
 
-## App Preview
-
-Interactive Streamlit interface for real-time text analysis:
-
-![App Screenshot](screenshot.png)
-
 ## Overview
 
 This project analyzes text data and extracts key linguistic features such as:
@@ -40,8 +34,9 @@ This project is relevant for roles involving:
 
 - Load text data from a CSV file
 - Clean and tokenize text
-- Detect language using rule-based markers
 - Remove basic stopwords in Italian and English
+- Detects Italian, English, and mixed-language text using rule-based markers
+- Handles dominant-language detection for code-switching examples
 - Compute:
   - Word count
   - Unique word count
@@ -50,6 +45,7 @@ This project is relevant for roles involving:
 - Compare Italian and English texts at dataset level
 - Export structured results to a CSV report
 - Analyze custom text through a Streamlit web app
+
 
 ---
 
