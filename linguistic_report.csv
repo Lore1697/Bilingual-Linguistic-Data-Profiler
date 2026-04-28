@@ -1,0 +1,9 @@
+id,language,word_count,unique_words,lexical_diversity,top_words
+1,English,9,9,1.0,"[('simple', 1), ('english', 1), ('sentence', 1), ('about', 1), ('artificial', 1)]"
+2,Italian,8,8,1.0,"[('semplice', 1), ('frase', 1), ('italiana', 1), (""sull'intelligenza"", 1), ('artificiale', 1)]"
+3,English,8,8,1.0,"[('language', 1), ('data', 1), ('reveal', 1), ('interesting', 1), ('patterns', 1)]"
+4,Italian,9,9,1.0,"[('linguistici', 1), ('possono', 1), ('rivelare', 1), ('pattern', 1), ('interessanti', 1)]"
+5,English,8,8,1.0,"[('ai', 1), ('systems', 1), ('require', 1), ('high', 1), ('quality', 1)]"
+6,Italian,12,11,0.92,"[('sistemi', 1), ('intelligenza', 1), ('artificiale', 1), ('richiedono', 1), ('annotati', 1)]"
+7,English,8,8,1.0,"[('project', 1), ('analyzes', 1), ('bilingual', 1), ('text', 1), ('data', 1)]"
+8,Italian,8,8,1.0,"[('progetto', 1), ('analizza', 1), ('testuali', 1), ('bilingui', 1), ('usando', 1)]"
